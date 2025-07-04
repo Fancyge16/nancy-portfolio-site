@@ -1,27 +1,16 @@
 function addTask() {
   const input = document.getElementById("taskInput");
-  const taskText = input.value.trim();
-
-  if (taskText === "") return;
+  const task = input.value.trim();
+  if (task === "") return;
 
   const li = document.createElement("li");
-  li.textContent = taskText;
+  li.innerHTML = `${task} <button onclick="removeTask(this)">❌</button>`;
 
-  // Toggle done
-  li.addEventListener("click", () => {
-    li.classList.toggle("done");
-  });
-
-  // Delete button
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "X";
-  deleteBtn.onclick = (e) => {
-    e.stopPropagation();
-    li.remove();
-  };
-
-  li.appendChild(deleteBtn);
   document.getElementById("taskList").appendChild(li);
-
-  input.value = ""; // Clear input
+  input.value = "";
 }
+
+function removeTask(button) {
+  button.parentElement.remove();
+}
+
